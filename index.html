@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>التطور التاريخي والجغرافي للخطوط العربية</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Cairo:wght@400;600;700&display=swap">
+<style>
+body{margin:0;background:#0E1B27}
+.ai{box-sizing:border-box;max-width:1280px;margin:0 auto;padding:24px 20px 32px;background:#0E1B27;color:#EAF0F4;font-family:'Cairo','Tajawal',system-ui,sans-serif;line-height:1.6}
+.ai *{box-sizing:border-box}
+.top{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;justify-content:space-between;margin-bottom:16px}
+h1{margin:0;font-family:'Amiri','Noto Naskh Arabic',serif;font-size:clamp(28px,4vw,42px);line-height:1.3;color:#F3D9A4}
+.sub{margin:2px 0 0;font-size:14.5px;color:#A9BAC7}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;padding:10px 14px;background:#16293A;border:1px solid #243B50;border-radius:12px;font-size:13px}
+.fam{display:flex;align-items:center;gap:5px}.fam i{width:13px;height:13px;border-radius:4px}
+.main{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:22px;align-items:start}
+.lh,.row{display:grid;grid-template-columns:124px minmax(0,1fr);gap:12px}
+.lh{padding:0 12px 6px;font-size:12px;color:#A9BAC7;border-bottom:1px solid #2C465D}
+.dts{display:grid;grid-template-columns:1fr 1fr;gap:6px;text-align:center}
+.lh .dts{padding-inline-end:13px}
+.row{padding:10px 12px;border-bottom:1px solid #1D3347;border-radius:10px;cursor:pointer;outline-offset:-2px}
+.row:hover{background:#13232F}.row.on{background:color-mix(in srgb,var(--c) 15%,transparent)}
+.row:focus-visible{outline:2px solid #fff}
+.dc{position:relative;border-inline-end:3px solid var(--c);padding-inline-end:10px}
+.dc::after{content:"";position:absolute;top:5px;inset-inline-end:-7.5px;width:12px;height:12px;border-radius:50%;background:var(--c);border:2px solid #0E1B27}
+.dts b{display:block;font-size:15px;line-height:1.3;white-space:nowrap}.dts small{font-size:11px;color:#A9BAC7}
+.span{display:grid;grid-template-columns:repeat(15,1fr);height:5px;margin-top:8px;background:#243B50;border-radius:3px}
+.span i{background:var(--c);border-radius:3px}.span.open i{background:linear-gradient(to left,transparent,var(--c) 65%)}
+.hd{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px}
+.hd h3{margin:0;font-size:17px;line-height:1.4;color:var(--c)}
+.regs{display:flex;flex-wrap:wrap;gap:4px}
+.reg{padding:0 8px;border-radius:999px;font-size:11.5px;border:1px solid var(--c);background:color-mix(in srgb,var(--c) 16%,transparent)}
+.note{margin-top:2px;font-size:12.5px;line-height:1.65;color:#B9C8D3}
+.mc{position:sticky;top:14px}
+.mapwrap{border-radius:14px;border:1px solid #243B50;overflow:hidden}
+.map{position:relative;direction:ltr;background:#0A1520}
+.map svg{display:block;width:100%;height:auto}
+.pin{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:3px;padding:3px 7px;border-radius:8px;background:rgba(11,24,35,.88);border:1px solid #2C465D;transition:opacity .2s}
+.pin span{font-size:11px;font-weight:700;white-space:nowrap;direction:rtl}
+.dots{display:flex;gap:3px}.dots i{width:10px;height:10px;border-radius:50%;transition:opacity .2s}
+.cap{margin:10px 0 0;min-height:52px;font-size:13.5px;line-height:1.8;text-align:center}
+.all{display:block;margin:6px auto 0;min-height:40px;padding:0 18px;border-radius:999px;border:1px solid #2C465D;background:transparent;color:#EAF0F4;font:600 13px 'Cairo',sans-serif;cursor:pointer}
+.all:focus-visible{outline:2px solid #fff}
+.fine{margin:6px 0 0;text-align:center;font-size:11.5px;color:#8EA2B1}
+.err{padding:30px 16px;text-align:center;color:#F0766A;direction:rtl;font-size:14px}
+@media (max-width:920px){.main{grid-template-columns:1fr}.mc{order:-1;top:0;z-index:5;background:#0E1B27;padding-bottom:6px}.pin span{display:none}.pin{padding:3px 5px}.cap{min-height:0;font-size:12.5px}.fine{display:none}}
+</style>
+</head>
+<body>
+<div class="ai">
+<div class="top">
+<div><h1>التطور التاريخي والجغرافي للخطوط العربية</h1><p class="sub">من الأقدم إلى الأحدث · اضغط على أي خط لتظهر أقاليمه بلونه على الخريطة</p></div>
+<div class="legend" id="legend"></div>
+</div>
+<div class="main">
+<div class="list">
+<div class="lh"><div class="dts"><span>القرن الهجري</span><span>الميلادي</span></div><div>الخط ونطاقه الجغرافي · الشريط الرفيع يبيّن المدى الزمني (ينتهي بتلاشٍ إن كان الخط مستمرًا)</div></div>
+<div id="rows"></div>
+</div>
+<div class="mc">
+<div class="mapwrap"><div class="map" id="map"><div class="err" style="color:#A9BAC7">جارٍ تحميل الخريطة…</div></div></div>
+<p class="cap" id="cap"></p>
+<button class="all" id="all" hidden>إظهار كل الخطوط</button>
+<p class="fine">حدود الأقاليم مرسومة من حدود الدول الحديثة، وهي تقريب للأقاليم التاريخية.</p>
+</div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script>
+const C = { jz:'#C9A27E', hj:'#F0766A', kf:'#4C9AF0', qy:'#8EC1FF', kz:'#7C8CFF', sx:'#3DCB8B', rq:'#A6E36B', mg:'#FF9F43', tl:'#B07CF0', dw:'#E39BE8' };
+const RG = {
+hij:['الحجاز واليمن','مكة · المدينة · صنعاء'],
+irq:['العراق','الحيرة · الأنبار · الكوفة · البصرة · بغداد'],
+sham:['الشام','دمشق · القدس · حلب'],
+egy:['مصر','الفسطاط · القاهرة'],
+ifr:['إفريقية (تونس وصقلية)','القيروان · المهدية · صقلية'],
+mag:['المغرب والأندلس','فاس · مراكش · قرطبة · غرناطة'],
+sud:['غرب إفريقيا','تمبكتو · شنقيط'],
+far:['فارس وآسيا الوسطى','تبريز · شيراز · هراة · بخارى'],
+hind:['الهند','دلهي · لاهور · لكناو'],
+tur:['الأناضول والبلقان','إسطنبول · بورصة · قونية']
+};
+const D = [
+{k:'jz',n:'الجزم (الحيري والأنباري)',sn:'الجزم',s:0,e:1,o:0,bar:'قبل – 1 هـ',h:'قبل الهجرة – القرن 1',m:'القرن 4 – 7',rk:['irq','hij'],t:'أصل الكتابة العربية، متفرّع عن الخط النبطي. تنقل الروايات انتقاله من الحيرة والأنبار إلى مكة.'},
+{k:'hj',n:'الخط الحجازي',sn:'الحجازي',s:1,e:2,o:0,bar:'1 – 2 هـ',h:'القرن 1 – 2',m:'القرن 7 – 8',rk:['hij','sham'],t:'مائل الحروف قليل التنقيط، ومنه المكي والمدني والمائل والمشق. كُتبت به أقدم المصاحف، ووُجدت نماذجه في صنعاء ودمشق.'},
+{k:'kf',n:'الكوفي المصحفي (المبكر)',sn:'الكوفي المصحفي',s:1,e:3,o:0,bar:'1 – 3 هـ',h:'القرن 1 – 3',m:'القرن 7 – 9',rk:['irq','sham'],t:'نشأ في الكوفة وانتشر في العراق والشام. حروفه منبسطة منتظمة، وهو خط المصاحف بعد الحجازي.'},
+{k:'qy',n:'الكوفي القيرواني',sn:'الكوفي القيرواني',s:3,e:5,o:0,bar:'3 – 5 هـ',h:'القرن 3 – 5',m:'القرن 9 – 11',rk:['ifr'],t:'كوفي مغربي فاخر نشأ في القيروان، وأشهر آثاره المصحف الأزرق بالذهب على رق نيلي.'},
+{k:'kz',n:'الكوفي المزخرف والهندسي',sn:'الكوفي المزخرف',s:4,e:9,o:0,bar:'4 – 9 هـ',h:'القرن 4 – 9',m:'القرن 10 – 15',rk:['egy','sham','far','tur'],t:'المورّق والمزهّر والمربّع، للعمارة والنقود والتحف. ازدهر في مصر الفاطمية وفي المشرق الإيراني والأناضول السلجوقي.'},
+{k:'sx',n:'الأقلام الستة: النسخ والثلث',sn:'الأقلام الستة',s:4,e:14,o:1,bar:'من 4 هـ',h:'من القرن 4 حتى اليوم',m:'من القرن 10 حتى اليوم',rk:['irq','egy','sham','tur'],t:'النسخ والثلث والمحقق والريحان والتوقيع والرقاع. ضبطها ابن مقلة (ت 328 هـ / 940 م) في بغداد، ثم ابن البواب وياقوت المستعصمي، وازدهرت في القاهرة المملوكية وإسطنبول.'},
+{k:'mg',n:'الخط المغربي والأندلسي',sn:'المغربي',s:5,e:14,o:1,bar:'من 5 هـ',h:'من القرن 5 حتى اليوم',m:'من القرن 11 حتى اليوم',rk:['mag','ifr','sud'],t:'من أنماطه الأندلسي والفاسي والمبسوط والسوداني. ما زالت مصاحف المغرب العربي تُكتب به.'},
+{k:'tl',n:'التعليق والنستعليق (الفارسي)',sn:'التعليق والنستعليق',s:8,e:14,o:1,bar:'من 8 هـ',h:'من القرن 8 حتى اليوم',m:'من القرن 14 حتى اليوم',rk:['far','hind'],t:'حروفه منحدرة متعلّقة. تطوّر التعليق في إيران ثم نشأ عنه النستعليق، خط الشعر الفارسي والأردي.'},
+{k:'dw',n:'الديواني والديواني الجلي',sn:'الديواني',s:9,e:13,o:0,bar:'9 – 13 هـ',h:'القرن 9 – 13',m:'القرن 15 – 19',rk:['tur','sham','egy'],t:'مشتق من التعليق، خط دواوين السلطنة العثمانية، حروفه متداخلة مستديرة. ما زال يُستعمل في الزخرفة.'},
+{k:'rq',n:'خط الرقعة',sn:'الرقعة',s:13,e:14,o:1,bar:'من 13 هـ',h:'من القرن 13 حتى اليوم',m:'من القرن 19 حتى اليوم',rk:['tur','egy','sham'],t:'خط سريع مبسّط ظهر في العهد العثماني، وصار أكثر الخطوط استعمالًا في الكتابة اليدوية اليومية في العالم العربي.'}
+];
+
+
+const $ = id => document.getElementById(id);
+const rows = D.map(d => ({ ...d, color: C[d.k] }));
+const FAM = [['الجذور والحجاز',['jz','hj']],['الكوفي',['kf','qy','kz']],['النسخ والثلث والرقعة',['sx','rq']],['المغربي',['mg']],['التعليق والديواني',['tl','dw']]];
+$('legend').innerHTML = FAM.map(([n, ks]) => '<div class="fam">' + ks.map(k => '<i style="background:' + C[k] + '"></i>').join('') + '<span>' + n + '</span></div>').join('');
+const hj = r => r.o ? 'من ' + r.s : (r.s === 0 ? 'قبل–' + r.e : (r.s === r.e ? r.s : r.s + '–' + r.e));
+const ce = r => { const a = r.s === 0 ? 4 : r.s + 6; return r.o ? 'من ' + a : a + '–' + (r.e + 6); };
+$('rows').innerHTML = rows.map(s => '<div class="row" role="button" tabindex="0" data-k="' + s.k + '" style="--c:' + s.color + '"><div class="dc"><div class="dts"><div><b>' + hj(s) + '</b><small>هـ</small></div><div><b>' + ce(s) + '</b><small>م</small></div></div><div class="span' + (s.o ? ' open' : '') + '"><i style="grid-column:' + (s.s + 1) + ' / ' + (s.e + 2) + '"></i></div></div><div class="bd"><div class="hd"><h3>' + s.n + '</h3><div class="regs">' + s.rk.map(k => '<span class="reg">' + RG[k][0] + '</span>').join('') + '</div></div><div class="note">' + s.t + '</div></div></div>').join('');
+
+let sel = null;
+const REG = {
+  hij: { n: ['Yemen'], clip: { 'Saudi Arabia': [[34,32],[40,32],[42.5,28.5],[44,24],[44,16],[34,16]] } },
+  irq: { n: ['Iraq'] },
+  sham: { n: ['Syria','Lebanon','Jordan','Israel','Palestine'] },
+  egy: { n: ['Egypt'] },
+  ifr: { n: ['Tunisia'], clip: { 'Libya': [[8,34.5],[18.5,34.5],[18.5,28.5],[8,28.5]], 'Italy': [[12.3,38.35],[15.62,38.35],[15.62,36.4],[12.3,36.4]] } },
+  mag: { n: ['Morocco','Algeria','Spain','Portugal'] },
+  sud: { n: ['Mauritania','Mali','Senegal','Niger'] },
+  far: { n: ['Iran','Afghanistan','Turkmenistan','Uzbekistan','Tajikistan'] },
+  hind: { n: ['Pakistan','India'] },
+  tur: { n: ['Turkey','Greece','Bulgaria','Albania','Macedonia','North Macedonia','Serbia','Bosnia and Herz.','Bosnia and Herzegovina','Montenegro','Kosovo'] }
+};
+const PIN = { mag:[-2,31,'المغرب والأندلس'], ifr:[12,30,'إفريقية'], sud:[-3,17.5,'غرب إفريقيا'], egy:[29.5,26.5,'مصر'], hij:[43,19.5,'الحجاز واليمن'], sham:[36.3,33.6,'الشام'], irq:[45,33.5,'العراق'], tur:[34,39.3,'الأناضول'], far:[57,34,'فارس وآسيا الوسطى'], hind:[73,27,'الهند'] };
+const NEUTRAL = '#35627F', DIM = '#22394D';
+
+function paint() {
+  const S = sel ? rows.find(r => r.k === sel) : null;
+  document.querySelectorAll('[data-r]').forEach(p => { if (p.tagName !== 'DIV') p.style.fill = S ? (S.rk.includes(p.dataset.r) ? S.color : DIM) : NEUTRAL; else p.style.opacity = (!S || S.rk.includes(p.dataset.r)) ? 1 : 0.35; });
+  document.querySelectorAll('.dots i').forEach(i => { i.style.opacity = (!S || i.dataset.k === sel) ? 1 : 0.4; i.style.outline = (S && i.dataset.k === sel) ? '2px solid #fff' : 'none'; });
+  document.querySelectorAll('.row').forEach(r => r.classList.toggle('on', r.dataset.k === sel));
+  $('all').hidden = !S;
+  $('cap').textContent = S ? S.n + ' · الأقاليم: ' + S.rk.map(k => RG[k][0]).join('، ') : 'كل نقطة ملوّنة على الخريطة تمثّل خطًا استُخدم في ذلك الإقليم.';
+}
+const pick = e => { const r = e.target.closest('.row'); if (!r) return; sel = (r.dataset.k !== sel) ? r.dataset.k : null; paint(); };
+$('rows').addEventListener('click', pick);
+$('rows').addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(e); } });
+$('all').addEventListener('click', () => { sel = null; paint(); });
+
+const W = 1000, H = 430;
+fetch('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json').then(r => r.json()).then(topo => {
+  const proj = d3.geoMercator().fitExtent([[0, 0], [W, H]], { type: 'MultiPoint', coordinates: [[-12,12],[78,12],[78,45],[-12,45]] });
+  const path = d3.geoPath(proj);
+  const geoms = topo.objects.countries.geometries;
+  const feats = topojson.feature(topo, topo.objects.countries).features;
+  let svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="خريطة تخطيطية للأقاليم"><rect width="' + W + '" height="' + H + '" fill="#0A1520"/>';
+  svg += feats.map(f => '<path d="' + path(f) + '" fill="#1D3347" stroke="#2A4660" stroke-width=".5"/>').join('');
+  let defs = '', body = '';
+  Object.keys(REG).forEach(k => {
+    const R = REG[k], clip = R.clip || {};
+    const g = geoms.filter(x => R.n.includes(x.properties.name));
+    if (g.length) body += '<path data-r="' + k + '" d="' + path(topojson.merge(topo, g)) + '" stroke="#0E1B27" stroke-width="1" stroke-linejoin="round"/>';
+    Object.keys(clip).forEach((nm, i) => {
+      const id = 'cl-' + k + i, f = feats.find(x => x.properties.name === nm);
+      if (!f) return;
+      defs += '<clipPath id="' + id + '"><polygon points="' + clip[nm].map(p => proj(p).join(',')).join(' ') + '"/></clipPath>';
+      body += '<path data-r="' + k + '" clip-path="url(#' + id + ')" d="' + path(f) + '" stroke="#0E1B27" stroke-width="1" stroke-linejoin="round"/>';
+    });
+  });
+  svg += '<defs>' + defs + '</defs>' + body + '</svg>';
+  const pins = Object.keys(PIN).map(k => {
+    const [x, y] = proj([PIN[k][0], PIN[k][1]]);
+    return '<div class="pin" data-r="' + k + '" style="left:' + (x / W * 100).toFixed(2) + '%;top:' + (y / H * 100).toFixed(2) + '%"><span>' + PIN[k][2] + '</span><div class="dots">' + rows.filter(r => r.rk.includes(k)).map(r => '<i data-k="' + r.k + '" style="background:' + r.color + '"></i>').join('') + '</div></div>';
+  }).join('');
+  $('map').innerHTML = svg + pins;
+  paint();
+}).catch(() => { $('map').innerHTML = '<div class="err">تعذّر تحميل بيانات الخريطة. تأكد من اتصال الصفحة بالإنترنت وأن موقعك يسمح بتحميل الملفات من cdn.jsdelivr.net.</div>'; });
+paint();
+</script>
+</body>
+</html>
